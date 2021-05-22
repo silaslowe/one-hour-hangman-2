@@ -4,7 +4,7 @@ import {Letter} from './letter'
 import {WordContext} from './wordProvider'
 
 export const Game = ({word}) => {
-    const {guessArray, addGuess} = useContext(WordContext)
+    const {guessArray, addGuess, wrongArray} = useContext(WordContext)
     const guess = useRef(null)
 
     
@@ -24,5 +24,6 @@ export const Game = ({word}) => {
             word.split("").map((l, i) => <Letter key={i} letter={l} guessArray={guessArray}/>)
             }
             </div>
+            <Guesses wrongArray={wrongArray} />
     </>
 }
