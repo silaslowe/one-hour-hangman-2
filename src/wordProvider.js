@@ -9,6 +9,8 @@ export const WordProvider = (props) => {
     const wordArray = ['fishes', "catch", "silas"]
 
     const startGame = () => {
+        setGuessArray([])
+        setWrongArray([])
         setWord(wordArray[Math.floor(Math.random() *  wordArray.length)])
         
       }
