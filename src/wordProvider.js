@@ -7,17 +7,20 @@ export const WordProvider = (props) => {
     const [guessArray, setGuessArray] = useState([])
     const [wrongArray, setWrongArray] = useState([])
     const wordArray = ['fishes', "catch", "silas"]
+    const [guessCount, setGuessCount] = useState(0)
 
     const startGame = () => {
         setGuessArray([])
         setWrongArray([])
         setWord(wordArray[Math.floor(Math.random() *  wordArray.length)])
+        setGuessCount(0)
       }
 
       const addGuess = (e, guess) => {
         const guessValue = guess.current.value
-        if(guessArray.includes(guessValue)) {
-          alert("Please guess again")
+        // checkGuessLength(guessValue)
+        if(guessArray.includes(guessValue) || guessValue.length > 1 || !guessValue.match(/[a-z]/i)) {
+          alert("Please pick a letter you haven't guessed")
         } else {
           setGuessArray([...guessArray, guessValue])
           updateWrongArray(guessValue)
@@ -30,13 +33,10 @@ export const WordProvider = (props) => {
     const updateWrongArray = (guess) => {
       if(!word.split("").includes(guess)){
         setWrongArray([...wrongArray, guess])
+        setGuessCount(guessCount+1)
       }
     }
-
-    console.log("GA",guessArray)
-    console.log("WA",wrongArray)
-    console.log("WORD",word)
-      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess}}>
+      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, guessCount}}>
         {props.children}
       </WordContext.Provider>
 }
