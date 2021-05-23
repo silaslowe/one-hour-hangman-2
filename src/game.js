@@ -6,8 +6,10 @@ import {WordContext} from './wordProvider'
 export const Game = ({word}) => {
     const {guessArray, addGuess, wrongArray, guessCount, wordSet, started} = useContext(WordContext)
     const guess = useRef(null)
-    const sortedGuesses = guessArray.sort((a,b) => a+b).join()
-    const sortedWordSet = wordSet.sort((a,b) => a+b).join()
+    const sortedGuesses = guessArray.sort((a,b) => a-b).join("")
+    const sortedWordSet = wordSet.sort((a,b) => a-b).join("")
+
+    console.log("SG", sortedGuesses, "SWS",sortedWordSet)
 
     return <>
         <form onSubmit={(e) => addGuess(e, guess)} style={{width: "10%", margin: "0  0 1rem 0"}}>

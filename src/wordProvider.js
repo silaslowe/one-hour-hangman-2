@@ -48,7 +48,7 @@ export const WordProvider = (props) => {
     if(started && word.length < 7) {
       startGame()
     }
-    console.log(word)
+    // console.log(guessArray, wordSet)
       return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet, started}}>
         {props.children}
       </WordContext.Provider>
