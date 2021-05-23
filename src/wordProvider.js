@@ -20,7 +20,12 @@ export const WordProvider = (props) => {
 
       const addGuess = (e, guess) => {
         const guessValue = guess.current.value
-        if(guessArray.includes(guessValue) || wrongArray.includes(guessValue) || guessValue.length > 1 || !guessValue.match(/[a-z]/i)) {
+        if(
+          guessArray.includes(guessValue) || 
+          wrongArray.includes(guessValue) || 
+          guessValue.length > 1 || 
+          !guessValue.match(/[a-z]/i))
+           {
           alert("Please pick a letter you haven't guessed")
         } else {
           if(wordSet.includes(guessValue)){
@@ -44,7 +49,7 @@ export const WordProvider = (props) => {
       startGame()
     }
     console.log(word)
-      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet}}>
+      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet, started}}>
         {props.children}
       </WordContext.Provider>
 }
