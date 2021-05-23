@@ -19,7 +19,7 @@ export const WordProvider = (props) => {
       }
 
       const addGuess = (e, guess) => {
-        const guessValue = guess.current.value
+        const guessValue = guess.current.value.toLowerCase()
         if(
           guessArray.includes(guessValue) || 
           wrongArray.includes(guessValue) || 
