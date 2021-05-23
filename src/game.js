@@ -20,7 +20,7 @@ export const Game = ({word}) => {
             <button disabled={wrongArray.length > 5 || guessArray.sort((a,b) => a+b).join() === wordSet.sort((a,b) => a+b).join()}>Make a guess</button>      
         </form>
 
-        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", border: "3px solid black", width: "65%"}}>
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", border: "3px solid black", width: "85%"}}>
             {
             word.split("").map((l, i) => <Letter key={i} letter={l} guessArray={guessArray}/>)
             }

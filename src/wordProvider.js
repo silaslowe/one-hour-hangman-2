@@ -1,4 +1,6 @@
 import React, {createContext, useState} from 'react'
+const randomWords = require('random-words');
+
 
 export const WordContext = React.createContext()
 
@@ -12,19 +14,21 @@ export const WordProvider = (props) => {
     const startGame = () => {
         setGuessArray([])
         setWrongArray([])
-        setWord(wordArray[Math.floor(Math.random() *  wordArray.length)])
+        setWord(randomWords())
+        // setWord(wordArray[Math.floor(Math.random() *  wordArray.length)])
       }
 
       const addGuess = (e, guess) => {
         const guessValue = guess.current.value
-        if(guessArray.includes(guessValue) || guessValue.length > 1 || !guessValue.match(/[a-z]/i)) {
+        if(guessArray.includes(guessValue) || wrongArray.includes(guessValue) || guessValue.length > 1 || !guessValue.match(/[a-z]/i)) {
           alert("Please pick a letter you haven't guessed")
         } else {
           if(wordSet.includes(guessValue)){
             setGuessArray([...guessArray, guessValue])
-          } else
+          } else {  
           updateWrongArray(guessValue)
         }
+      }
         e.preventDefault()
         guess.current.value = ""
         
@@ -35,9 +39,8 @@ export const WordProvider = (props) => {
         setWrongArray([...wrongArray, guess])
       }
     }
+    console.log(word)
 
-    console.log("GA", guessArray)
-    console.log("WA", wrongArray)
       return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet}}>
         {props.children}
       </WordContext.Provider>
