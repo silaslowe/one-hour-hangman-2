@@ -1,6 +1,6 @@
 import {Game} from './game'
-import {useState, useContext} from 'react'
-import {WordContext, WordProvider} from './wordProvider'
+import {useContext} from 'react'
+import {WordContext} from './wordProvider'
 
 
 function App() {

@@ -5,22 +5,27 @@ const randomWords = require('random-words');
 export const WordContext = React.createContext()
 
 export const WordProvider = (props) => {
-    const [word, setWord] = useState("playee")
+    const [word, setWord] = useState("")
     const [guessArray, setGuessArray] = useState([])
     const [wrongArray, setWrongArray] = useState([])
-    const wordArray = ['fishes', "catch", "silas"]
     const wordSet = [...new Set(word)]
+    const [started, setStarted] = useState(false)
 
     const startGame = () => {
         setGuessArray([])
         setWrongArray([])
         setWord(randomWords())
-        // setWord(wordArray[Math.floor(Math.random() *  wordArray.length)])
+        setStarted(true)
       }
 
       const addGuess = (e, guess) => {
         const guessValue = guess.current.value
-        if(guessArray.includes(guessValue) || wrongArray.includes(guessValue) || guessValue.length > 1 || !guessValue.match(/[a-z]/i)) {
+        if(
+          guessArray.includes(guessValue) || 
+          wrongArray.includes(guessValue) || 
+          guessValue.length > 1 || 
+          !guessValue.match(/[a-z]/i))
+           {
           alert("Please pick a letter you haven't guessed")
         } else {
           if(wordSet.includes(guessValue)){
@@ -39,9 +44,12 @@ export const WordProvider = (props) => {
         setWrongArray([...wrongArray, guess])
       }
     }
-    console.log(word)
 
-      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet}}>
+    if(started && word.length < 7) {
+      startGame()
+    }
+    // console.log(guessArray, wordSet)
+      return <WordContext.Provider value={{word, setWord, startGame, guessArray, addGuess, wrongArray, wordSet, started}}>
         {props.children}
       </WordContext.Provider>
 }
