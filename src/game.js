@@ -6,9 +6,9 @@ import {WordContext} from './wordProvider'
 export const Game = ({word}) => {
     const {guessArray, addGuess, wrongArray, guessCount, wordSet, started} = useContext(WordContext)
     const guess = useRef(null)
-    const sortedGuesses = guessArray.sort((a,b) => a-b).join("")
-    const sortedWordSet = wordSet.sort((a,b) => a-b).join("")
-
+    const sortedGuesses = guessArray.sort().join("")
+    const sortedWordSet = wordSet.sort().join("")
+    console.log(guessArray, wordSet)
     console.log("SG", sortedGuesses, "SWS",sortedWordSet)
 
     return <>
