@@ -1,18 +1,18 @@
 import {Game} from './game'
+import {Guesses} from './guesses'
 import {useContext} from 'react'
 import {WordContext} from './wordProvider'
 
 
 function App() {
-const {word, startGame} = useContext(WordContext)
+const {wrongArray, guessCount} = useContext(WordContext)
 
-  return (
-    <div className="App" style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-      <h1 style={{textAlign: "center"}}>HANGED PERSON</h1>
-      <button onClick={()=> startGame()} style={{width: "10%", margin: "2rem"}}>Start</button>
-      <Game word={word}/> 
+  return (<div style={{backgroundColor: "lightblue"}}>
+    <Game/>
+    <Guesses wrongArray={wrongArray} guessCount={guessCount} />
     </div>
   );
 }
 
 export default App;
+
